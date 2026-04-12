@@ -15,10 +15,13 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok' });
 });
 
+// Use Render's port in production
+const PORT = process.env.PORT || 3000;
+
 // Connect DB + start server
 db.sequelize.sync().then(() => {
-  app.listen(3000, () => {
-    console.log('Server running on port 3000');
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
   });
 }).catch((error) => {
   console.error('Database error:', error);
