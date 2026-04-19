@@ -8,7 +8,10 @@ app.use(express.json());
 
 // Routes
 const movieRoutes = require('./routes/movies');
+const favoriteRoutes = require('./routes/favorites');
+
 app.use('/api/movies', movieRoutes);
+app.use('/api/favorites', favoriteRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {
