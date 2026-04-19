@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:3000/api/movies';
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 const TMDB_BASE_URL = 'https://api.themoviedb.org/3';
 
@@ -16,7 +16,7 @@ export async function searchMovies(query) {
 }
 
 export async function getSavedMovies() {
-  const response = await fetch(BASE_URL);
+  const response = await fetch(`${BASE_URL}/favorites`);
 
   if (!response.ok) {
     throw new Error('Failed to fetch saved movies');
@@ -26,7 +26,7 @@ export async function getSavedMovies() {
 }
 
 export async function saveMovie(movie) {
-  const response = await fetch(BASE_URL, {
+  const response = await fetch(`${BASE_URL}/favorites`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ export async function saveMovie(movie) {
 }
 
 export async function deleteMovie(tmdbId) {
-  const response = await fetch(`${BASE_URL}/${tmdbId}`, {
+  const response = await fetch(`${BASE_URL}/favorites/${tmdbId}`, {
     method: 'DELETE',
   });
 
