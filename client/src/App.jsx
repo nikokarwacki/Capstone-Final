@@ -51,16 +51,16 @@ function App() {
     }
   };
 
-  const handleDeleteMovie = async (tmdbId) => {
+  const handleDeleteMovie = async (movieId) => {
     try {
-      await deleteMovie(tmdbId);
+      await deleteMovie(movieId);
       await loadSavedMovies();
     } catch (err) {
       alert(err.message);
     }
   };
 
-  const savedIds = savedMovies.map((movie) => movie.tmdbId);
+  const savedIds = savedMovies.map((movie) => movie.movieId);
 
   return (
     <div style={{ padding: '20px' }}>
@@ -154,7 +154,7 @@ function App() {
                   />
                   <h3>{movie.title}</h3>
                   <p>{movie.releaseDate || 'No release date'}</p>
-                  <button onClick={() => handleDeleteMovie(movie.tmdbId)}>
+                  <button onClick={() => handleDeleteMovie(movie.movieId)}>
                     Remove
                   </button>
                 </div>
