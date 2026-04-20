@@ -32,11 +32,10 @@ export async function saveMovie(movie) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      tmdbId: movie.id,
+      movieId: movie.id,
       title: movie.title,
       posterPath: movie.poster_path,
       releaseDate: movie.release_date,
-      overview: movie.overview,
     }),
   });
 
@@ -49,8 +48,8 @@ export async function saveMovie(movie) {
   return data;
 }
 
-export async function deleteMovie(tmdbId) {
-  const response = await fetch(`${BASE_URL}/favorites/${tmdbId}`, {
+export async function deleteMovie(movieId) {
+  const response = await fetch(`${BASE_URL}/favorites/${movieId}`, {
     method: 'DELETE',
   });
 
