@@ -1,7 +1,9 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
-const db = require('./models');
+
+// initialize sqlite db file
+require('./models/db');
 
 app.use(cors({
   origin: 'https://capstone-final-olive.vercel.app',
@@ -23,14 +25,8 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok' });
 });
 
-// Use Render's port in production
 const PORT = process.env.PORT || 3000;
 
-// Connect DB + start server
-db.sequelize.sync().then(() => {
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-  });
-}).catch((error) => {
-  console.error('Database error:', error);
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
